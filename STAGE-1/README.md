@@ -1,16 +1,48 @@
-# React + Vite
+# Stage 1
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Priority Inbox Design
 
-Currently, two official plugins are available:
+The objective is to display the top 10 most important unread notifications.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Priority Rules
 
-## React Compiler
+Notification priority is determined using:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Notification Type Weight
+2. Recency
 
-## Expanding the ESLint configuration
+Weights:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Placement = 3
+* Result = 2
+* Event = 1
+
+Priority Score:
+
+Priority Score = (Weight × 1000) - AgeInMinutes
+
+Higher scores indicate higher priority.
+
+### Algorithm
+
+1. Fetch notifications.
+2. Calculate priority score for each notification.
+3. Sort notifications in descending order of priority score.
+4. Select the first 10 notifications.
+5. Display the resulting list.
+
+### Efficient Maintenance
+
+For continuously arriving notifications:
+
+* Maintain a Min Heap of size 10.
+* Insert new notifications based on computed priority.
+* If heap size exceeds 10, remove the lowest-priority notification.
+
+Complexity:
+
+* Insert: O(log 10)
+* Remove: O(log 10)
+* Retrieval: O(1)
+
+This approach avoids sorting the entire dataset whenever new notifications arrive.
