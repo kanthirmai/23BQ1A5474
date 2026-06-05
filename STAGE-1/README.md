@@ -35,14 +35,14 @@ Higher scores indicate higher priority.
 
 For continuously arriving notifications:
 
-* Maintain a Min Heap of size 10.
-* Insert new notifications based on computed priority.
-* If heap size exceeds 10, remove the lowest-priority notification.
+1. Maintain a Min Heap of size 10.
+2. Insert new notifications based on computed priority.
+3. If heap size exceeds 10, remove the lowest-priority notification.
 
 Complexity:
 
-* Insert: O(log 10)
-* Remove: O(log 10)
-* Retrieval: O(1)
+ Insert: O(log 10)
+ Remove: O(log 10)
+ Retrieval: O(1)
 
 This approach avoids sorting the entire dataset whenever new notifications arrive.
