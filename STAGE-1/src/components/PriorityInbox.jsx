@@ -61,10 +61,6 @@ export default function PriorityInbox() {
             <p>
               <strong>Timestamp:</strong> {n.Timestamp}
             </p>
-
-            <p>
-              <strong>Priority Score:</strong> {calculatePriority(n).toFixed(2)}
-            </p>
           </div>
         ))
       )}
